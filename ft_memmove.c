@@ -11,27 +11,38 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-void	ft_memmove(void *dst, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	unsigned int	i;
-	char			*char_dest;
-	char			*char_source;
+	char			*char_dst;
+	const char		*char_src;
 
-	*char_dest = (char *) dst;
-	*char_source = (char *) src;
-	i = 0;
-	while (i < n)
+	if (dst == src)
 	{
-		char_dest[i] = char_source[i];
-		i++;
+		return (dst);
 	}
+	char_dst = (char *) dst;
+	char_src = (char *) src;
+	if (dst < src)
+	{
+		ft_memcpy(dst, src, n);
+	}
+	if (dst > src)
+	{
+		while (n > 0)
+		{
+			char_dst[n] = char_src[n];
+			n--;
+		}
+	}
+	return (char_dst);
 }
 
 /*int main()
 {
-	char origen[] = "123456789";
-	unsigned int slots = 4;
-	ft_memmove(origen + 2, origen, slots);
-	printf("%s", origen +2);
+	const char origen[20] = "abcd";
+	char destino[20] = "123456789";
+	size_t slots = 4;
+	ft_memmove(destino, origen, slots);
+	printf("%s", destino);
 	return(0);
 }*/

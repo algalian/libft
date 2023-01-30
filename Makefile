@@ -1,32 +1,38 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Makefile                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: algalian <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/19 13:28:25 by algalian          #+#    #+#             */
-/*   Updated: 2023/01/19 13:28:29 by algalian         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: algalian <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/30 14:23:15 by algalian          #+#    #+#              #
+#    Updated: 2023/01/30 14:23:17 by algalian         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libft.a
+CC = gcc -c
+INCLUDE = libft.h
+FLAGS = -Wall -Wextra -Werror
+AR = ar rc
 
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra 
+SRCS = *.c 
 
-SOURCE = $(wildcard *.c)
-
-OBJECTS = $(SOURCE:.c=.o)
+OBJ = *.o
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-	ar rcs $(NAME) $(OBJECTS)
-	
+$(NAME): 
+	$(CC)  $(FLAGS) $(SRCS)
+	$(AR)  $(NAME) $(OBJ)
+	ranlib $(NAME)
+
 clean:
-	rm -f $(OBJECTS)
+	/bin/rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	/bin/rm -rf $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

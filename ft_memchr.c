@@ -14,9 +14,9 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	unsigned int	i;
-	char			*char_s;
+	const char		*char_s;
 
-	*char_s = (char *) s;
+	char_s = (char *) s;
 	i = 0;
 	while (char_s[i] != '\0' && i <= n)
 	{
@@ -28,13 +28,3 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-
-/*int main()
-{
-	char string[] =  "Mi jaca galopa y corta el viento cuando pasa por el puerto caminito de Jerez";
-	int caracter = 97;
-	unsigned int alcance = 120;
-	printf("memchr:%s",memchr(string, caracter, alcance));
-	printf("\n");
-	printf("ft_memchr: %s", ft_memchr(string, caracter, alcance));
-}*/

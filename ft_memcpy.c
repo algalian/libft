@@ -11,51 +11,21 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-static int	ft_restrict(void *dst, const void *src)
-{
-	int		i;
-	int		j;
-	char	*char_dest;
-	char	*char_source;
-
-	*char_dest = (char *) dst;
-	*char_source = (char *) src;
-	i = 0;
-	while (char_dest[i] != '\0' && char_source [i] != '\0')
-	{
-		j = 0;
-		while (char_source[j] != '\0')
-		{
-			if (&char_source[j] == &char_dest[i])
-			{
-				return (0);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned int	i;
-	char			*char_dest;
-	char			*char_source;
+	char			*char_dst;
+	const char		*char_src;
 
-	*char_dest = (char *) dst;
-	*char_source = (char *) src;
-	if (ft_restrict(dst, src) == 0)
-	{
-		return (NULL);
-	}
+	char_src = (char *) src;
+	char_dst = (char *) dst;
 	i = 0;
-	while (i < n)
+	while (char_src[i] != '\0' && i <= n)
 	{
-		char_dest[i] = char_source[i];
+		char_dst[i] = char_src[i];
 		i++;
 	}
-	return (char_dest);
+	return (char_dst);
 }
 
 /*int main()
@@ -63,8 +33,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	char destino [] = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
 	char origen [] = "abcdefg";
 	unsigned int slots = 3;
-	ft_memcpy(destino, origen, slots);
-	printf("%s", origen);
-	printf("%s", destino);
+	printf("ft_memcpy: %s", ft_memcpy(destino, origen, slots));
+	printf("\n");
+	printf("memcpy: %s", memcpy(destino, origen, slots));
 	return(0);
 }*/
