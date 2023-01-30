@@ -30,11 +30,12 @@ void	*ft_memmove(void *dst, const void *src, size_t n)
 	{
 		while (n > 0)
 		{
-			char_dst[n] = char_src[n];
 			n--;
+			char_dst[n] = char_src[n];
+			
 		}
 	}
-	return (char_dst);
+	return (dst);
 }
 
 /*int main()

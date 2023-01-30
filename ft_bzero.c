@@ -13,12 +13,14 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned int	i;
-
+	size_t	i;
+	char	*c;
+	
+	c = (char *) s;
 	i = 0;
-	while (i <= n)
+	while (i < n)
 	{
-		((char *) s)[i] = 0;
+		c[i] = 0;
 		i++;
 	}
 }
@@ -26,7 +28,7 @@ void	ft_bzero(void *s, size_t n)
 /*int	main()
 {
 	char string [] = "111111111111";
-	unsigned int slots = 11;
+	S = 11;
 	ft_bzero(string, slots);
 	printf("%s", string);
 	return(0);

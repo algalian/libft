@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-int	ft_isdigit(unsigned char n)
+int	ft_isdigit(int n)
 {
-	if (n >= 48 && n <= 57)
+	if (n >= '0' && n <= '9')
 	{
 		return (1);
 	}

@@ -13,26 +13,34 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	unsigned int	i;
-	unsigned int	j;
+	size_t	i;
 
-	j = ft_strlen((char *)src);
 	i = 0;
-	while ((dst[i] != '\0' && src[i] != '\0') && i < dstsize)
+	if(dstsize == 0)
+	{
+		return(ft_strlen(src));
+	}
+	while (src[i] != '\0' && i < dstsize - 1)
 	{
 		dst[i] = src[i];
 		i++;
 	}
-	dst[i] = '\0';
-	return (j);
+	if (dstsize > i)
+	{
+		dst[i] = '\0';
+	}	
+	return (ft_strlen(src));
 }
 
 /*int main()
 {
 	char origen[] = "AAAAAAAAA";
 	char destino[] = "BBBBBBB";
-	unsigned int size = 4;
-	printf("%lu", ft_strlcpy(destino, origen,size));
+	size_t size = 35;
+	//printf("%lu", ft_strlcpy(destino, origen,size));//
+	printf("\n");
 	printf("%lu", strlcpy(destino, origen, size));
+	printf("\n");
+	printf("%s", destino);
 	return(0);
 }*/

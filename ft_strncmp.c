@@ -11,17 +11,18 @@
 /* ************************************************************************** */
 #include"libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
-	while ((s1[i] != '\0' && s2[i] != '\0') && i < n)
+	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
 	{
-		if (s1[i] > s2[i])
-			return (1);
-		else if (s1[i] < s2[i])
-			return (-1);
+		if(s1[i] != s2[i])
+		{
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+
+		}
 		i++;
 	}
 	return (0);
@@ -33,4 +34,6 @@ int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
     char string2[] = "AAAB";
     unsigned int alcance = 9;
     printf("%i", ft_strncmp(string1, string2, alcance));
+	printf("\n");
+	printf("%i", strncmp(string1, string2, alcance));
 }*/
