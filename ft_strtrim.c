@@ -16,7 +16,7 @@ static int	ft_left(char const *s1, char const *set)
 	unsigned int	i;
 
 	i = 0;
-	while (ft_strchr(set, s1[i]) != NULL)
+	while (ft_strchr(set, s1[i]) != NULL && i < ft_strlen(s1))
 	{
 		i++;
 	}
@@ -36,18 +36,10 @@ static int	ft_right(char const *s1, char const *set)
 	return (i);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+static char	*ft_write(char *trimmed, char const *s1, int left, int size)
 {
-	unsigned int	left;
-	unsigned int	right;
-	unsigned int	k;
-	unsigned int	size;
-	char			*trimmed;
+	int	k;	
 
-	left = ft_left(s1, set);
-	right = ft_right(s1, set);
-	size = right - left;
-	trimmed = malloc(size + 1);
 	k = 0;
 	while (k < size + 1)
 	{
@@ -59,10 +51,32 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (trimmed);
 }
 
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	unsigned int	left;
+	unsigned int	size;
+	char			*trimmed;
+
+	left = ft_left(s1, set);
+	if (left >= ft_strlen(s1))
+	{
+		trimmed = malloc(1);
+		if (!trimmed)
+			return (NULL);
+		trimmed[0] = '\0';
+		return (trimmed);
+	}
+	size = ft_right(s1, set) - left;
+	trimmed = malloc((sizeof(char) * size) + 2);
+	if (!trimmed)
+		return (NULL);
+	return (ft_write(trimmed, s1, left, size));
+}
+
 /*int main()
 {
-	char string[] = "AAAAAAAAABAAAAAAAAAAAABBABCholaBA";
-	char set []= "A";
+	char string[] = "AAAAAA";
+	char set []= "";
 	printf("%s", ft_strtrim(string, set));
 	return(0);
 }*/

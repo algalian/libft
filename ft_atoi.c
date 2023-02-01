@@ -11,11 +11,20 @@
 /* ************************************************************************** */
 #include"libft.h"
 
+static int	ft_blanks(char c)
+{
+	if ((c >= 9 && c <= 13) || c == ' ')
+	{
+		return (1);
+	}
+	return (0);
+}
+
 static int	clean_string(const char *str, unsigned int i)
 {
 	if (ft_isdigit(str[i]) == 1)
 		return (i);
-	if (str[i] != ' ' && (str[i] != '+' && str[i] != '-'))
+	if (ft_blanks(str[i]) != 1 && (str[i] != '+' && str[i] != '-'))
 	{
 		if (ft_isdigit(str[i]) != 1)
 			return (-1);
@@ -23,12 +32,14 @@ static int	clean_string(const char *str, unsigned int i)
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (ft_isdigit(str[i + 1]) != 1)
+		{
 			return (-1);
+		}
 		return (i + 1);
 	}
-	if (str[i] == ' ')
+	if (ft_blanks(str[i]) == 1)
 	{
-		while (str[i] == ' ')
+		while (ft_blanks(str[i]) == 1)
 			i++;
 		return (clean_string(str, i));
 	}
@@ -68,7 +79,7 @@ int	ft_atoi(const char *str)
 
 /*int main()
 {
-	char str [] = "-2147483648"; //2147483647//
+	char str [] = "\t\v\f\r\n \f-06050"; 
 	printf("ft_atoi: %i",ft_atoi(str));
 	printf("%c", '\n');
 	printf("atoi: %i", atoi(str));

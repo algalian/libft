@@ -70,12 +70,12 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-/*int main()
+int main()
 {
-	int nb = -1;
+	int nb = -3546465;
 	char *ptr;
 	printf("%s",ft_itoa(nb));
 	ptr = ft_itoa(nb);
 	free(ptr);
 	return(0);
-}*/
+}

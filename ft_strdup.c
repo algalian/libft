@@ -13,25 +13,22 @@
 
 char	*ft_strdup(const char *s1)
 {
-	unsigned int	i;
 	char			*s2;
 
-	s2 = malloc(ft_strlen(s1) * sizeof(const char));
-	i = 0;
-	while (s1[i] != '\0')
+	s2 = malloc((ft_strlen(s1) * sizeof(const char)) + 1);
+	if(!s2)
 	{
-		s2[i] = s1[i];
-		i++;
+		return(NULL);
 	}
-	s2[i] = '\0';
-	free(s2);
+	ft_strlcpy(s2, s1, ft_strlen(s1) + 1);
+	s2[ft_strlen(s1)] = '\0';
 	return (s2);
 }
 
 /*int main()
 {   
 	char string[] = "Cópiame ésta";
-	printf("ft_strdup: %s",ft_strdup(string));
+	printf("ft_strdup:%s",ft_strdup(string));
 	printf("\n");
 	printf("strdup:%s", strdup(string));
 	return(0);

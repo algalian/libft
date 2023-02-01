@@ -13,25 +13,25 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	unsigned int	i;
 	unsigned int	j;
 	unsigned int	k;
 
-	i = ft_strlen(needle);
-	if (i == 0)
-		return ((char *) haystack);
+	if (len == 0 && (!needle || !haystack))
+		return (0);
+	if (!*needle)
+		return ((char *)haystack);
 	j = 0;
 	while (haystack[j] != '\0' && j < len)
 	{
 		if (haystack[j] == needle[0])
 		{
 			k = 0;
-			while (haystack[j] == needle[k])
+			while ((haystack[j] == needle[k]) && ((j < len) && (needle[k] != '\0' && haystack[j] != '\0')))
 			{
 				j++;
 				k++;
 			}
-			if (k == i)
+			if (k == ft_strlen(needle))
 				return ((char *) haystack + j - k);
 		}
 		j++;
@@ -41,9 +41,11 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
 /*int main()
 {
-	char string[] = "Yo en ningún momento le he interrumpido a usted";
-	char substring[] = "le";
-	unsigned int alcance = 45;
-	printf("%s",ft_strnstr(string, substring, alcance));
+	char string[] = "MZIRIBMZIRIBMZE123";
+	char substring[] = "123";
+	size_t alcance = strlen(substring);
+	printf("ft_strnstr:%s",ft_strnstr(string, substring, alcance));
+	printf("\n");
+	printf("strnstr:%s", strnstr(string, substring, alcance));
 	return(0);
 }*/
