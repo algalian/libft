@@ -16,7 +16,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char			*substr;
 	unsigned int	i;
 
-	if (start >= ft_strlen(s))
+	if (start >= ft_strlen(s) || len >= ft_strlen(s))
 	{
 		len = ft_strlen(s);
 	}
@@ -36,9 +36,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 /*int main()
 {
-	char const string[] = "0123456789";
-	unsigned int start = 4;
-	unsigned int end = 4;
+	char const string[] = "tripouille";
+	unsigned int start = 0;
+	unsigned int end = 42000;
 	printf("%s", ft_substr(string, start, end));
 	return(0);
 }*/

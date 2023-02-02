@@ -13,12 +13,14 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	int		i;
+	char	b;
 
+	b = c;
 	i = ft_strlen(s);
 	while (i >= 0)
 	{
-		if (s[i] == c)
+		if (s[i] == b)
 		{
 			return ((char *)s + i);
 		}
@@ -30,8 +32,10 @@ char	*ft_strrchr(const char *s, int c)
 /*int main()
 {
 
-	const char string[] = "turuututututupapa!";
-	int caracter = 97;
+	const char string[] = "tripouille";
+	int caracter = 't' + 256;
     printf ("%s", ft_strrchr(string, caracter));
+	printf("\n");
+	printf("%s", strrchr(string, caracter));
     return(0);
 }*/

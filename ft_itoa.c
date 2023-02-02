@@ -12,8 +12,12 @@
 
 #include"libft.h"
 
-int	ft_abs(int n)
+unsigned int	ft_abs(int n)
 {
+	if (n == -2147483648)
+	{
+		return (2147483648);
+	}
 	if (n < 0)
 	{
 		return (n * (-1));
@@ -21,14 +25,12 @@ int	ft_abs(int n)
 	return (n);
 }
 
-static int	ft_count(int n)
+static unsigned int	ft_count(unsigned int m)
 {
 	int	i;
-	int	m;
 
 	i = 1;
-	m = ft_abs(n);
-	while (m > 10)
+	while (m >= 10)
 	{
 		m = m / 10;
 		i++;
@@ -52,7 +54,7 @@ char	*ft_itoa(int n)
 	unsigned int	m;
 
 	m = ft_abs(n);
-	count = ft_count(n) - 1 + ft_sign(n);
+	count = ft_count(m) - 1 + ft_sign(n);
 	str = malloc((sizeof (char) * count) + 1);
 	if (!str)
 		return (NULL);
@@ -69,13 +71,9 @@ char	*ft_itoa(int n)
 		str[0] = '-';
 	return (str);
 }
-
-int main()
+/*int main()
 {
-	int nb = -3546465;
-	char *ptr;
+	int nb = -2147483648;
 	printf("%s",ft_itoa(nb));
-	ptr = ft_itoa(nb);
-	free(ptr);
 	return(0);
-}
+}*/

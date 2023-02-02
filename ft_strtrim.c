@@ -69,7 +69,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size = ft_right(s1, set) - left;
 	trimmed = malloc((sizeof(char) * size) + 2);
 	if (!trimmed)
+	{
 		return (NULL);
+	}
 	return (ft_write(trimmed, s1, left, size));
 }
 
@@ -79,4 +81,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char set []= "";
 	printf("%s", ft_strtrim(string, set));
 	return(0);
+	system("leaks a.out");
+
 }*/
