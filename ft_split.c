@@ -5,168 +5,91 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: algalian <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 12:20:20 by algalian          #+#    #+#             */
-/*   Updated: 2023/01/30 12:20:23 by algalian         ###   ########.fr       */
+/*   Created: 2023/02/06 15:58:57 by algalian          #+#    #+#             */
+/*   Updated: 2023/02/06 15:59:04 by algalian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-static unsigned int	ft_words(const char *s, char c)
+static unsigned int	ft_words(char const *s, char c)
 {
 	unsigned int	i;
-	unsigned int	j;
+	unsigned int	words;
 
 	i = 0;
-	j = 0;
+	words = 0;
 	while (s[i] != '\0')
 	{
-		while (s[i] != c && s[i] != '\0')
+		if (s[i] != c)
 		{
-			i++;
+			words++;
+			while (s[i] != c && s[i] != '\0')
+				i++;
+			if (s[i] == '\0')
+				return (words);
 		}
-		j++;
-		while (s[i] == c && s[i])
-		{
-			i++;
-		}
-	}
-	return (j);
-}
-
-static char	*cut(char const *s, char c)
-{
-	char	q[1];
-	char	*p;
-
-	q[0] = c;
-	p = ft_strtrim(s, q);
-	if(!p)
-	{
-		free(p);
-		return(NULL); 
-	}
-
-	return (p);
-}
-
-static unsigned int	*ft_letters(const char *s, char c, int words)
-{
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	k;
-	unsigned int	*letters;
-
-	letters = malloc(sizeof (int) * words);
-	if(!letters)
-	{
-		free(letters);
-		return(NULL);
-	}
-	i = 0;
-	k = 0;
-	while (s[i] != '\0')
-	{
-		j = 0;
-		while (s[i] != c && s[i] != '\0')
-		{
-			i++;
-			j++;
-		}
-		while (s[i] == c && s[i])
-		{
-			i++;
-		}
-		letters[k] = j;
-		k++;
-	}
-	return (letters);
-}
-
-static char	*ft_write(char *a, const char *s, unsigned int i, int start)
-{
-	unsigned int	j;
-	unsigned int	k;
-
-	a = malloc((sizeof (char) * i) + 1);
-	j = 0;
-	k = start;
-	while (j < i)
-	{
-		a[j] = s[k];
-		j++;
-		k++;
-	}
-	a[j] = '\0';
-	return (a);
-}
-
-static char **freeall(char **array)
-{
-	unsigned int i;
-
-	i = 0;
-	while(array[i])
-	{
-		free(array[i]);
 		i++;
 	}
+	return (words);
+}
+
+void	**ft_freeall(char **array)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+	}
 	free(array);
-	return(NULL);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char			*p;
-	char			**array;
-	unsigned int	*letters;
-	unsigned int	start;
+	char			**split;
 	unsigned int	i;
+	unsigned int	j;
+	unsigned int	k;
 
-	p = cut(s, c);
-	array = (char **) malloc((ft_words(p, c) * sizeof (char *)) + 1);
-	if(!array)
-	{
-		free(array);
-		return(NULL);
-	}
-	letters = ft_letters(p, c, ft_words(p, c));
+	i = ft_words(s, c);
+	split = (char **) malloc((sizeof(char *) * (i + 1)));
+	if (!split)
+		ft_freeall(split);
+	split[i] = NULL;
 	i = 0;
-	start = 0;
-	while (i < ft_words(p, c) && i < ft_strlen(p))
+	k = 0;
+	while (s[i] != '\0' && k < ft_words(s, c))
 	{
-		array[i] = ft_write(array[i], p, letters[i], start);
-		if(!array[i])
-		{
-			freeall(array);
-		}
-		start = start + letters[i];
-		i++;
-		while (p[start] == c && p[i])
-			start++;
+		while (s[i] == c && s[i])
+			i++;
+		j = i;
+		while (s[i] != c && s[i])
+			i++;
+		split[k] = ft_substr(s, j, i - j);
+		if (!split[k])
+			ft_freeall(split);
+		k++;
 	}
-	free(letters);
-	free(p);
-	array[i] = NULL;
-	return (array);
+	return (split);
 }
 
-/*int	main()
+/*int main()
 {
-	char const string[] = " asdfasdf asdf asdf aggsdfg  ";
+	char const string[] = "";
 	char separador = ' ';
 	char **split;
 	unsigned int i;
-
 	split = ft_split(string, separador);
 	i = 0;
-	while(i < ft_words(string, separador))
+	while(i < ft_words(string,separador))
 	{
 		printf("String %i: %s", i, split[i]);
 		printf("\n");
 		i++;
 	}
-	freeall(split);
 	//system("leaks -q a.out");//
 	return(0);
 }*/

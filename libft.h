@@ -52,5 +52,10 @@ void	ft_putendl_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putnbr_fd(int n, int fd);
+typedef struct s_list
+{
+    void *content;
+    struct s_list *next;
+} t_list;
 
 #endif
