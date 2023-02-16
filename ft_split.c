@@ -54,11 +54,10 @@ char	**ft_split(char const *s, char c)
 	unsigned int	j;
 	unsigned int	k;
 
-	i = ft_words(s, c);
-	split = (char **) malloc((sizeof(char *) * (i + 1)));
+	split = (char **) malloc((sizeof(char *) * (ft_words(s, c) + 1)));
 	if (!split)
-		ft_freeall(split);
-	split[i] = NULL;
+		return (NULL);
+	split[ft_words(s, c)] = NULL;
 	i = 0;
 	k = 0;
 	while (s[i] != '\0' && k < ft_words(s, c))
@@ -70,7 +69,7 @@ char	**ft_split(char const *s, char c)
 			i++;
 		split[k] = ft_substr(s, j, i - j);
 		if (!split[k])
-			ft_freeall(split);
+			return ((char **) ft_freeall(split));
 		k++;
 	}
 	return (split);
