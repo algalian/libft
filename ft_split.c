@@ -42,6 +42,7 @@ void	**ft_freeall(char **array)
 	while (array[i])
 	{
 		free(array[i]);
+		i++;
 	}
 	free(array);
 	return (NULL);
